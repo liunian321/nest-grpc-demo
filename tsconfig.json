@@ -1,0 +1,9 @@
+{
+  "extends": "@nest-boot/tsconfig/library.json",
+  "parserOptions": {
+    "project": [
+      "apps/*/tsconfig.json",
+      "packages/*/tsconfig.json",
+    ]
+  },
+}
