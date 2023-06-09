@@ -1,0 +1,17 @@
+{
+  "name": "@hello-world/server",
+  "version": "0.0.1",
+  "license": "MIT",
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "nest build",
+    "dev": "nest start --watch",
+    "debug": "nest start --debug --watch",
+    "start": "node dist/main",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register jest --runInBand",
+    "test:e2e": "jest --config ./test/jest-e2e.json"
+  }
+}
