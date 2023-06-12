@@ -1,10 +1,12 @@
 module.exports = {
+  env: {
+    node: true,
+    jest: true,
+  },
   root: true,
-  // This tells ESLint to load the config from the package `eslint-config-custom`
-  extends: ["custom"],
-  settings: {
-    next: {
-      rootDir: ["apps/*/"],
-    },
+  extends: ["@nest-boot/eslint-config"],
+  plugins: ["simple-import-sort"],
+  parserOptions: {
+    project: "./tsconfig.json",
   },
 };

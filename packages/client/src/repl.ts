@@ -1,26 +1,30 @@
 import { repl } from "@nestjs/core";
 import * as dotenv from "dotenv";
+import { isEmpty } from "lodash";
 import ms from "ms";
-import { HelloWorldModule } from "./hello-world.module";
+
+import { AppModule } from "./app.module";
 
 const config = dotenv.config().parsed;
 
 void (async () => {
   if (typeof config === "undefined") {
-    throw new Error("No .env file found");
+    throw new Error(".env file not found");
   }
 
   const replServer = await repl(
-    HelloWorldModule.register({
+    AppModule.register({
       url: config.GRPC_URL,
       keepalive: {
-        keepaliveTimeMs: Number(config.KEEPALIVE_TIMEOUT_MS || ms("10m")),
-        keepaliveTimeoutMs: Number(config.KEEPALIVE_TIME_MS || ms("10m")),
+        keepaliveTimeMs: isEmpty(config.KEEPALIVE_TIMEOUT_MS)
+          ? ms("10m")
+          : parseInt(config.KEEPALIVE_TIMEOUT_MS),
+        keepaliveTimeoutMs: isEmpty(config.KEEPALIVE_TIME_MS)
+          ? ms("10m")
+          : parseInt(config.KEEPALIVE_TIMEOUT_MS),
       },
     })
   );
-
-  console.log("Starting REPL...");
 
   replServer.setupHistory(".repl_history", (err) => {
     if (err !== null) {

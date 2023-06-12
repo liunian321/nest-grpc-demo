@@ -1,2 +1,2 @@
-export * from "./hello-world.module";
-export * from "./hello.service";
+export * from "./app.module";
+export * from "./providers/hello.provider";
