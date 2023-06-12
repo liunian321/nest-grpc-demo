@@ -17,3 +17,8 @@ pnpm run proto-generate
 ```
 See the official example for more information
 https://github.com/stephenh/ts-proto
+## question
+Does gRPC it support persistent connections?
+Yes,gRPC is based on the http protocol, and http is based on the tcp protocol. So gRPC also supports long connections.
+Will this project be updated in the future?
+Yes,I'm planning to add permission checks to secure microservices.
