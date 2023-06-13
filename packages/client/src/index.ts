@@ -1,2 +1,2 @@
-export * from "./app.module";
-export * from "./providers/hello.provider";
+export * from "./services";
+export * from "./user.module";

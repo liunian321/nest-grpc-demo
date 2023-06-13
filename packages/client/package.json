@@ -1,5 +1,5 @@
 {
-  "name": "@hello-world/client",
+  "name": "@user-management/client",
   "version": "0.0.1",
   "publishConfig": {
     "access": "public"
@@ -20,7 +20,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@hello-world/common": "workspace:^"
+    "@user-management/common": "workspace:^"
   },
   "devDependencies": {
     "@nest-boot/tsconfig": "^4.0.0-beta.1",
@@ -28,6 +28,7 @@
     "@nestjs/config": "^2.3.1",
     "@nestjs/core": "^9.4.0",
     "@nestjs/microservices": "^9.4.0",
+    "@types/lodash": "^4.14.195",
     "@types/ms": "^0.7.31",
     "dotenv": "^16.1.4",
     "ms": "^2.1.3",

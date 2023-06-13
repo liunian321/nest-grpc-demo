@@ -1,10 +1,9 @@
 import { LoggerModule } from "@nest-boot/logger";
 import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
-import { DiscoveryService } from "@nestjs/core";
 
-import { HelloController } from "./controllers/hello.controller";
-import { HelloProvider } from "./providers/hello.provider";
+import { UserController } from "./controllers/user.controller";
+import { UserService } from "./services/user.service";
 
 const LoggerDynamicModule = LoggerModule.registerAsync({
   useFactory: () => ({}),
@@ -12,7 +11,7 @@ const LoggerDynamicModule = LoggerModule.registerAsync({
 
 @Module({
   imports: [ConfigModule.forRoot({ isGlobal: true }), LoggerDynamicModule],
-  controllers: [HelloController],
-  providers: [DiscoveryService, HelloProvider],
+  controllers: [UserController],
+  providers: [UserService],
 })
 export class AppModule {}

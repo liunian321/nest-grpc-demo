@@ -1,9 +1,8 @@
-import { HELLO_PROTO_PACKAGE_NAME } from "@hello-world/common";
 import { Logger } from "@nest-boot/logger";
-import { RequestContextInterceptor } from "@nest-boot/request-context";
 import { ConfigService } from "@nestjs/config";
-import { DiscoveryService, NestFactory } from "@nestjs/core";
+import { NestFactory } from "@nestjs/core";
 import { type GrpcOptions, Transport } from "@nestjs/microservices";
+import { USER_PROTO_PACKAGE_NAME } from "@user-management/common";
 import ms from "ms";
 import { join } from "path";
 
@@ -25,16 +24,13 @@ async function bootstrap(): Promise<void> {
   const configService = app.get(ConfigService);
 
   // gRPC options
-  const microservice = app.connectMicroservice<GrpcOptions>({
+  app.connectMicroservice<GrpcOptions>({
     transport: Transport.GRPC,
     options: {
       // listen on all IPv4 interfaces
       url: `0.0.0.0:${+configService.get("PORT", 5000)}`,
-      package: HELLO_PROTO_PACKAGE_NAME,
-      protoPath: join(
-        __dirname,
-        "../node_modules/@hello-world/common/dist/hello.proto"
-      ),
+      package: USER_PROTO_PACKAGE_NAME,
+      protoPath: join(__dirname, "../../../packages/common/dist/user.proto"),
       keepalive: {
         keepaliveTimeMs: +configService.get("GRPC_KEEPALIVE_TIME_MS", ms("9m")),
         keepaliveTimeoutMs: +configService.get(
@@ -44,11 +40,6 @@ async function bootstrap(): Promise<void> {
       },
     },
   });
-
-  // microservice start
-  microservice.useGlobalInterceptors(
-    new RequestContextInterceptor(app.get(DiscoveryService))
-  );
 
   await app.startAllMicroservices();
 

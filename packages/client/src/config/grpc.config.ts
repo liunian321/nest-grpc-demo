@@ -1,4 +1,5 @@
 import { type GrpcOptions, Transport } from "@nestjs/microservices";
+import { protobufPackage } from "@user-management/common";
 import * as dotenv from "dotenv";
 import { join } from "path";
 
@@ -7,11 +8,8 @@ dotenv.config();
 export const grpcOptions: GrpcOptions = {
   transport: Transport.GRPC,
   options: {
-    package: "CancelLikePageProto",
+    package: protobufPackage,
     url: process.env.GRPC_URL,
-    protoPath: join(
-      __dirname,
-      "../../node_modules/@hello-world/common/dist/hello.proto"
-    ),
+    protoPath: join(__dirname, "../../../common/dist/user.proto"),
   },
 };
